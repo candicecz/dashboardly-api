@@ -13,6 +13,12 @@ module.exports = (dataLoader) => {
 
 // TEST TEST TEST TEST
 
+// TESTING TESTING TESTING
+// TESTING TESTING TESTING
+// TESTING TESTING TESTING
+// TESTING TESTING TESTING
+// TESTING TESTING TESTING
+
   // Delete a bookmark
   bookmarksController.delete('/:id', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
