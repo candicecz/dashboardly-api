@@ -11,6 +11,7 @@ module.exports = (dataLoader) => {
     res.status(500).json({ error: 'not implemented' });
   });
 
+// TEST TEST TEST TEST
 
   // Delete a bookmark
   bookmarksController.delete('/:id', onlyLoggedIn, (req, res) => {
