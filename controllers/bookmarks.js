@@ -11,7 +11,7 @@ module.exports = (dataLoader) => {
     // PATCH makes an update on
     res.status(500).json({ error: 'not implemented' });
   });
-
+  
   // Delete a bookmark
   bookmarksController.delete('/:id', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
@@ -20,6 +20,3 @@ module.exports = (dataLoader) => {
 
   return bookmarksController;
 };
-
-
-// comments ...
