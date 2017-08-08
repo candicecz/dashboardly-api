@@ -14,3 +14,16 @@ VALUES
 (3, 'fgdfgsdfg', 'fvfdsgsdfgsd'),
 (4, 'fgdfgsdfg', 'fvfdsgsdfgsd'),
 (5, 'fgdfgsdfg', 'fvfdsgsdfgsd');
+<<<<<<< HEAD
+=======
+
+
+
+INSERT INTO `boards` (`ownerId`, `title`)
+VALUES
+(1, 'fgdfgsdfg'),
+(2, 'fgdfgsdfg'),
+(3, 'fgdfgsdfg'),
+(4, 'fgdfgsdfg'),
+(5, 'fgdfgsdfg');
+>>>>>>> bookmarks

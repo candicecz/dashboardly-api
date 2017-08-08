@@ -5,12 +5,25 @@ const onlyLoggedIn = require('../lib/only-logged-in');
 module.exports = (dataLoader) => {
   const bookmarksController = express.Router();
 
+
   // Modify a bookmark //
   bookmarksController.patch('/:id', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
     // PATCH makes an update on bookmarks
     // dataLoade;
     res.status(500).json({ error: 'not implemented' });
+
+
+  // Modify a bookmark //          .onlyLoggedIn,
+  bookmarksController.patch('/:id', (req, res) => {
+    // TODO: this is up to you to implement :)
+    // console.log(onlyLoggedIn);
+    return dataLoader.boardBelongsToUser(req.params.id, req.user.id)
+    .then(() => dataLoader.updateBookmark(1, {boardId:3, title:'Gee Biz', URL:'react.oil'}))
+    .then(data => res.json(data))
+    .catch(err => res.status(500).json({ error: 'not implemented' }));
+    // TODO: make sure to verify user
+
   });
   // Retrieve a list of boards
   // boardsController.get('/', (req, res) => {
@@ -21,6 +34,8 @@ module.exports = (dataLoader) => {
   //   .then(data => res.json(data))
   //   .catch(err => res.status(400).json(err));
   // });
+
+
 
   // Delete a bookmark
   bookmarksController.delete('/:id', onlyLoggedIn, (req, res) => {
