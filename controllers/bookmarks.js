@@ -8,38 +8,10 @@ module.exports = (dataLoader) => {
   // Modify a bookmark // GIT BRANCH TEST
   bookmarksController.patch('/:id', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
+    // PATCH makes an update on
     res.status(500).json({ error: 'not implemented' });
   });
-
-// TEST TEST TEST TEST
-///////hiiiiiiiii
-// TESTING TESTING TESTING
-// TESTING TESTING TESTING
-// TESTING TESTING TESTING
-// TESTING TESTING TESTING
-// TESTING TESTING TESTING
-
-
-// TESTING TESTING TESTING
-// TESTING TESTING TESTING
-// TESTING TESTING TESTING
-// TESTING TESTING TESTING
-// TESTING TESTING TESTING
-
-
-// TESTING TESTING TESTING
-// TESTING TESTING TESTING
-// TESTING TESTING TESTING
-// TESTING TESTING TESTING
-// TESTING TESTING TESTING
-
-
-// TESTING TESTING TESTING
-// TESTING TESTING TESTING
-// TESTING TESTING TESTING
-// TESTING TESTING TESTING
-// TESTING TESTING TESTING
-
+  
   // Delete a bookmark
   bookmarksController.delete('/:id', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
@@ -48,6 +20,3 @@ module.exports = (dataLoader) => {
 
   return bookmarksController;
 };
-
-
-//test from hyoojyn
