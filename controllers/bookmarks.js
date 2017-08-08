@@ -8,8 +8,9 @@ module.exports = (dataLoader) => {
   // Modify a bookmark // GIT BRANCH TEST
   bookmarksController.patch('/:id', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
-    // PATCH makes an update on
-    res.status(500).json({ error: 'not implemented' });
+    return dataLoader.getAllBookmarksForBoard(req.params.id)
+    .then(data => res.json(data))
+    .catch(err => res.status(500).json({ error: 'not implemented' }));
   });
 
   // Delete a bookmark
