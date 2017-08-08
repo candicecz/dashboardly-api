@@ -8,7 +8,7 @@ module.exports = (dataLoader) => {
   // Modify a bookmark // GIT BRANCH TEST
   bookmarksController.patch('/:id', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
-    // PATCH makes an update on 
+    // PATCH makes an update on
     res.status(500).json({ error: 'not implemented' });
   });
 
@@ -20,3 +20,5 @@ module.exports = (dataLoader) => {
 
   return bookmarksController;
 };
+
+// TEST TEST TOAST
