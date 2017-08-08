@@ -25,8 +25,8 @@ module.exports = (dataLoader) => {
   });
 
 
-  // Create a new board
-  boardsController.post('/', onlyLoggedIn, (req, res) => {
+  // Create a new board      .onlyLoggedIn,
+  boardsController.post('/', (req, res) => {
     dataLoader.createBoard({
       ownerId: req.user.id,
       title: req.body.title,
@@ -37,15 +37,15 @@ module.exports = (dataLoader) => {
   });
 
 
-  // Modify an owned board
-  boardsController.patch('/:id', onlyLoggedIn, (req, res) => {
+  // Modify an owned board      .onlyLoggedIn,
+  boardsController.patch('/:id', (req, res) => {
     // First check if the board to be PATCHed belongs to the user making the request
-    dataLoader.boardBelongsToUser(req.params.id, req.user.id)
-    .then(() => {
+    // dataLoader.boardBelongsToUser(req.params.id, req.user.id)
+    // .then(() => {
       return dataLoader.updateBoard(req.params.id, {
         title: req.body.title,
         description: req.body.description
-      });
+      // });
     })
     .then(data => res.json(data))
     .catch(err => res.status(400).json(err));

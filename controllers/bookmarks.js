@@ -6,39 +6,24 @@ module.exports = (dataLoader) => {
   const bookmarksController = express.Router();
 
 
-  // Modify a bookmark             .onlyLoggedIn,
-  bookmarksController.patch('/:id', (req, res) => {
-
-    // req.params.id ==== id of the bookmark
-    // req.body.title
-    // req.body.boardId
-    // req.body.url
-
+  // Modify a bookmark              .onlyLoggedIn,
+  bookmarksController.patch('/:id',  (req, res) => {
     // TODO: this is up to you to implement :)
-
-    // .then(data => res.json(data))
-    // .catch(err => res.status(500).json({ error: 'not implemented' }));
     // TODO: make sure to verify user
-    // dataLoader.bookmarkBelongsToUser(req.params.id, req.user.id)
-    // .then(() => {
 
-      const new_data = {
-        title: req.body.title,
-        boardId : req.body.boardId,
-        url: req.body.url
-      }
-
+      // ** MOCK DATA *******************
+      const mock_user = 1;
       const mock_data = {
-        title: "how to run quickly",
+        title: "how to run quickly -- er -- er",
         boardId : 1,
-        url:"bolt.com"
-      }
+        url:"bolt.com" // req.body ...
+      } // ******************************
 
-      console.log('plz throw in title, boardId, and the url');
-      console.log(mock_data);
+      // console.log('plz throw in title, boardId, and the url');
+      // console.log(mock_data);
 
-      return dataLoader.bookmarkBelongsToUser(req.params.id, req.user.id)
-      .then(dataLoader.updateBookmark(req.params.id, mock_data))
+      dataLoader.bookmarkBelongsToUser(req.params.id, mock_user)
+      .then(() => dataLoader.updateBookmark(req.params.id, mock_data))
       .then(data => {console.log(data);
       return res.json(data)})
       .catch(err => res.status(400).json(err));
