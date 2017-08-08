@@ -15,22 +15,33 @@ module.exports = (dataLoader) => {
     // req.body.url
 
     // TODO: this is up to you to implement :)
-    // return dataLoader.bookmarkBelongsToUser(req.params.id, req.user.id)
-    // .then(() => dataLoader.updateBookmark(1, {boardId:3, title:'Gee Biz', URL:'react.oil'}))
+
     // .then(data => res.json(data))
     // .catch(err => res.status(500).json({ error: 'not implemented' }));
     // TODO: make sure to verify user
     // dataLoader.bookmarkBelongsToUser(req.params.id, req.user.id)
     // .then(() => {
-      return dataLoader.updateBookmark(req.params.id, {
+
+      const new_data = {
         title: req.body.title,
         boardId : req.body.boardId,
         url: req.body.url
-      })
-    //})
-    .then(data => {console.log(data);
+      }
+
+      const mock_data = {
+        title: "how to run quickly",
+        boardId : 1,
+        url:"bolt.com"
+      }
+
+      console.log('plz throw in title, boardId, and the url');
+      console.log(mock_data);
+
+      return dataLoader.bookmarkBelongsToUser(req.params.id, req.user.id)
+      .then(dataLoader.updateBookmark(req.params.id, mock_data))
+      .then(data => {console.log(data);
       return res.json(data)})
-    .catch(err => res.status(400).json(err));
+      .catch(err => res.status(400).json(err));
   });
 
 
