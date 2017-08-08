@@ -18,6 +18,7 @@ module.exports = (dataLoader) => {
 
   // Retrieve a single board
   boardsController.get('/:id', (req, res) => {
+    console.log("get board")
     dataLoader.getSingleBoard(req.params.id)
     .then(data => res.json(data))
     .catch(err => res.status(400).json(err));
