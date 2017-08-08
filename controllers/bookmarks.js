@@ -20,5 +20,3 @@ module.exports = (dataLoader) => {
 
   return bookmarksController;
 };
-
-// TEST TEST TOAST
