@@ -9,7 +9,7 @@ module.exports = (dataLoader) => {
   bookmarksController.patch('/:id', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
     // PATCH makes an update on bookmarks
-    // dataLoader;
+    // dataLoade;
     res.status(500).json({ error: 'not implemented' });
   });
   // Retrieve a list of boards
