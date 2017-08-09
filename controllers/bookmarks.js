@@ -19,10 +19,17 @@ module.exports = (dataLoader) => {
         url:"bolt.com" // req.body ...
       } // ******************************
 
+      const real_data = {
+        title: req.body.title,
+        boardId : req.body.boardId,
+        url: req.body.url
+      }
+      const real_user = req.body.userId; //
 
-      dataLoader.bookmarkBelongsToUser(req.params.id, mock_user)
-      .then(() => dataLoader.updateBookmark(req.params.id, mock_data))
-      .then(data => {//console.log(data);
+      dataLoader.bookmarkBelongsToUser(req.params.id, real_user)
+      .then(() => dataLoader.updateBookmark(req.params.id, real_data))
+      .then(data => {
+        console.log(data);
       return res.json(data)})
       .catch(err => res.status(400).json(err));
   });
@@ -32,7 +39,17 @@ module.exports = (dataLoader) => {
   // Delete a bookmark
   bookmarksController.delete('/:id', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
-    res.status(500).json({ error: 'not implemented' });
+
+    const real_user = req.body.userId; //
+    const bookmark_id = req.params.id;
+
+    dataLoader.bookmarkBelongsToUser(bookmark_id, real_user)
+    .then(() => {
+      console.log('went by line 48');
+      return dataLoader.deleteBookmark(bookmark_id);
+    })
+    .then(() => res.status(204).end())
+    .catch(res.status(500).json({ error: 'not implemented' }));
   });
 
   return bookmarksController;

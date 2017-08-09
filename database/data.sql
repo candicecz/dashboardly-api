@@ -20,6 +20,8 @@ INSERT INTO `users` (`email`,`password`) VALUES ("mattis@felisDonec.net","GNR99E
 INSERT INTO `bookmarks` (`boardId`,`title`,`url`) VALUES (2,"malesuada.","mollis"),(6,"ante","nec,"),(3,"Maecenas","Mauris"),(6,"egestas,","magnis"),(1,"Nam","enim"),(5,"justo","risus."),(3,"dolor","rutrum"),(6,"eget","Nullam")
 ,(8,"risus","risus."),(1,"lectus","elit");
 
+
+
 INSERT INTO `boards` (`ownerId`, `title`)
 VALUES
 (1, 'fgdfgsdfg'),
@@ -27,6 +29,7 @@ VALUES
 (3, 'fgdfgsdfg'),
 (4, 'fgdfgsdfg'),
 (5, 'fgdfgsdfg');
+
 
 -- INSERT INTO `sessions` (`userId`, `token`)
 -- VALUES
