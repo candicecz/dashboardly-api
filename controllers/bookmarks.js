@@ -14,20 +14,19 @@ module.exports = (dataLoader) => {
       // ** MOCK DATA *******************
       const mock_user = 1;
       const mock_data = {
-        title: "how to run quickly -- er -- er",
+        title: "how to run quickly -- ger -- er",
         boardId : 1,
         url:"bolt.com" // req.body ...
       } // ******************************
-
       const real_data = {
         title: req.body.title,
         boardId : req.body.boardId,
         url: req.body.url
       }
-      const real_user = req.body.userId; //
+      const real_user = req.user.users_id;
 
-      dataLoader.bookmarkBelongsToUser(req.params.id, real_user)
-      .then(() => dataLoader.updateBookmark(req.params.id, real_data))
+      dataLoader.bookmarkBelongsToUser(req.params.id, mock_user)
+      .then(() => dataLoader.updateBookmark(req.params.id, mock_data))
       .then(data => {
         console.log(data);
       return res.json(data)})
@@ -40,16 +39,15 @@ module.exports = (dataLoader) => {
   bookmarksController.delete('/:id', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
 
-    const real_user = req.body.userId; //
+    const real_user = req.user.users_id; //
     const bookmark_id = req.params.id;
 
     dataLoader.bookmarkBelongsToUser(bookmark_id, real_user)
     .then(() => {
-      console.log('went by line 48');
       return dataLoader.deleteBookmark(bookmark_id);
     })
     .then(() => res.status(204).end())
-    .catch(res.status(500).json({ error: 'not implemented' }));
+    .catch(err => res.status(400).json(err));
   });
 
   return bookmarksController;

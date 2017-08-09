@@ -42,6 +42,7 @@ module.exports = (dataLoader) => {
   // Retrieve current user
   authController.get('/me', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
+    console.log(req.user.users_email);
     dataLoader.getUserFromSession(req.sessionToken)
     .then(ans => res.status(200).json(ans))
     .catch(err => res.status(500).json({ error: 'self not implemented' }));
