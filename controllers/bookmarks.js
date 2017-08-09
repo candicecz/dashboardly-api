@@ -6,8 +6,8 @@ module.exports = (dataLoader) => {
   const bookmarksController = express.Router();
 
 
-  // Modify a bookmark              .onlyLoggedIn,
-  bookmarksController.patch('/:id',  (req, res) => {
+  // Modify a bookmark
+  bookmarksController.patch('/:id', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
     // TODO: make sure to verify user
 
@@ -19,12 +19,10 @@ module.exports = (dataLoader) => {
         url:"bolt.com" // req.body ...
       } // ******************************
 
-      // console.log('plz throw in title, boardId, and the url');
-      // console.log(mock_data);
 
       dataLoader.bookmarkBelongsToUser(req.params.id, mock_user)
       .then(() => dataLoader.updateBookmark(req.params.id, mock_data))
-      .then(data => {console.log(data);
+      .then(data => {//console.log(data);
       return res.json(data)})
       .catch(err => res.status(400).json(err));
   });
