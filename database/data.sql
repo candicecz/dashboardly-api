@@ -1,3 +1,4 @@
+
 -- INSERT INTO `users` (`email`,`password`)
 -- VALUES ('fdsbfksdbfksabfk','dshbfaskdhfbah'),
 -- ('fdsbfk@sdbfksabfk','dshbfaskdhfbah'),
@@ -22,6 +23,7 @@ INSERT INTO `bookmarks` (`boardId`,`title`,`url`) VALUES (2,"malesuada.","mollis
 
 
 
+
 INSERT INTO `boards` (`ownerId`, `title`)
 VALUES
 (1, 'fgdfgsdfg'),
@@ -30,14 +32,5 @@ VALUES
 (4, 'fgdfgsdfg'),
 (5, 'fgdfgsdfg');
 
-
--- INSERT INTO `sessions` (`userId`, `token`)
--- VALUES
--- ('1' , 'bdskjafbakjdbf#£¢'),
--- ('2' , 'bdskafbakjdbf#£¢'),
--- ('3' , 'bdskjafbgfvakjdbf#£¢'),
--- ('4' , 'bdskjbakjdbf#£¢'),
--- ('5' , 'bdskjafbakj%#dbf#£¢'),
--- ('6' , 'afbakjdbf#£¢');
 
 INSERT INTO `sessions` (`userId`,`token`) VALUES (6,"FOA70GQB0AS"),(5,"WIF40NRW4ZB"),(6,"TFE33WUB9NV"),(6,"RRL02XKP5NG"),(10,"SWD04OXZ3KA"),(8,"KON07KNJ9DN"),(3,"KZH14YKN2CB"),(3,"IPJ17QKE6WX"),(1,"DDE79QRE1XO"),(8,"IYQ60PVL7YS");

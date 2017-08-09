@@ -31,7 +31,19 @@ module.exports = (dataLoader) => {
         console.log(data);
       return res.json(data)})
       .catch(err => res.status(400).json(err));
+
   });
+  // Retrieve a list of boards
+  // boardsController.get('/', (req, res) => {
+  //   dataLoader.getAllBoards({
+  //     page: req.query.page,
+  //     limit: req.query.count
+  //   })
+  //   .then(data => res.json(data))
+  //   .catch(err => res.status(400).json(err));
+  // });
+
+
 
 
 
@@ -52,5 +64,3 @@ module.exports = (dataLoader) => {
 
   return bookmarksController;
 };
-
-// TEST TEST TOAST
