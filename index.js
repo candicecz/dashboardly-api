@@ -18,8 +18,10 @@ const bookmarksController = require('./controllers/bookmarks.js');
 // Database / data loader initialization
 const connection = mysql.createPool({
   user: 'root',
+  password: 'root',
   database: 'dashboardly'
 });
+
 const dataLoader = new DashboardlyDataLoader(connection);
 
 
@@ -32,7 +34,6 @@ app.use(checkLoginToken(dataLoader));
 app.use('/auth', authController(dataLoader));
 app.use('/boards', boardsController(dataLoader));
 app.use('/bookmarks', bookmarksController(dataLoader));
-
 
 // Start the server
 const port = process.env.PORT || 3000;
