@@ -1,6 +1,8 @@
 const express = require('express');
 //did this worrrrkkk?
 const onlyLoggedIn = require('../lib/only-logged-in');
+var md5 = require('md5'); // for hashin emails
+
 
 module.exports = (dataLoader) => {
   const authController = express.Router();
@@ -44,6 +46,15 @@ module.exports = (dataLoader) => {
     // TODO: this is up to you to implement :)
     console.log(req.user.users_email);
     dataLoader.getUserFromSession(req.sessionToken)
+    .then(ans => {
+      const email = ans.users_email;
+      const HASH = md5(email);
+      const hashed = "https://www.gravatar.com/avatar/"+HASH;
+      ans.avatarUrl = hashed;
+      console.log(ans);
+      return ans;
+    })
+
     .then(ans => res.status(200).json(ans))
     .catch(err => res.status(500).json({ error: 'self not implemented' }));
   });
