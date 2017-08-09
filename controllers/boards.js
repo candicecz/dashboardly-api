@@ -25,20 +25,22 @@ module.exports = (dataLoader) => {
   });
 
 
-  // Create a new board      .onlyLoggedIn,
-  boardsController.post('/', (req, res) => {
-    dataLoader.createBoard({
-      ownerId: req.user.id,
+  // Create a new board
+  boardsController.post('/', onlyLoggedIn, (req, res) => {
+
+    board_data = {
+      ownerId: req.user.users_id,
       title: req.body.title,
       description: req.body.description
-    })
+    };
+    dataLoader.createBoard(board_data)
     .then(data => res.status(201).json(data))
     .catch(err => res.status(400).json(err));
   });
 
 
-  // Modify an owned board      .onlyLoggedIn,
-  boardsController.patch('/:id', (req, res) => {
+  // Modify an owned board
+  boardsController.patch('/:id', onlyLoggedIn, (req, res) => {
     // First check if the board to be PATCHed belongs to the user making the request
     // dataLoader.boardBelongsToUser(req.params.id, req.user.id)
     // .then(() => {
@@ -81,8 +83,8 @@ module.exports = (dataLoader) => {
     const board_id = Number(req.params.id);
     const bookmark_data = {
       boardId: board_id,
-      title: "Never eat sushi by yourself and not sharing",
-      url: "sushi.com"
+      title: req.body.title,
+      url: req.body.url
     }
     dataLoader.boardBelongsToUser(board_id, user_id)
     .then(() => {

@@ -9,9 +9,17 @@ module.exports = (dataLoader) => {
 
   // Create a new user (signup)
   authController.post('/users', (req, res) => {
-    dataLoader.createUser({
+    const userData = {
       email: req.body.email,
       password: req.body.password
+    };
+    dataLoader.createUser(userData)
+    .then(ans => {
+      const email = ans.email;
+      const HASH = md5(email);
+      const hashed = "https://www.gravatar.com/avatar/"+HASH;
+      ans.avatarUrl = hashed;
+      return ans;
     })
     .then(user => res.status(201).json(user))
     .catch(err => res.status(400).json(err));
@@ -31,6 +39,8 @@ module.exports = (dataLoader) => {
 
   // Delete a session (logout)
   authController.delete('/sessions', onlyLoggedIn, (req, res) => {
+    // console.log('ST: ', req.sessionToken, ' BT: ', req.body.token);
+    // console.log('req body :: ', req.body);
     if (req.sessionToken === req.body.token) {
       dataLoader.deleteToken(req.body.token)
       .then(() => res.status(204).end())
@@ -44,7 +54,6 @@ module.exports = (dataLoader) => {
   // Retrieve current user
   authController.get('/me', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
-    console.log(req.user.users_email);
     dataLoader.getUserFromSession(req.sessionToken)
     .then(ans => {
       const email = ans.users_email;
@@ -54,7 +63,6 @@ module.exports = (dataLoader) => {
       console.log(ans);
       return ans;
     })
-
     .then(ans => res.status(200).json(ans))
     .catch(err => res.status(500).json({ error: 'self not implemented' }));
   });
