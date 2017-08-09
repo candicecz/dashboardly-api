@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 INSERT INTO `users` (`email`,`password`)
 VALUES ('fdsbfksdbfksabfk','dshbfaskdhfbah'),
 ('fdsbfk@sdbfksabfk','dshbfaskdhfbah'),
@@ -18,6 +19,9 @@ VALUES
 <<<<<<< HEAD
 =======
 =======
+=======
+
+>>>>>>> 345199a2f5a0dcff148a741c2be790d589c475f5
 -- INSERT INTO `users` (`email`,`password`)
 -- VALUES ('fdsbfksdbfksabfk','dshbfaskdhfbah'),
 -- ('fdsbfk@sdbfksabfk','dshbfaskdhfbah'),
@@ -39,7 +43,11 @@ INSERT INTO `users` (`email`,`password`) VALUES ("mattis@felisDonec.net","GNR99E
 
 INSERT INTO `bookmarks` (`boardId`,`title`,`url`) VALUES (2,"malesuada.","mollis"),(6,"ante","nec,"),(3,"Maecenas","Mauris"),(6,"egestas,","magnis"),(1,"Nam","enim"),(5,"justo","risus."),(3,"dolor","rutrum"),(6,"eget","Nullam")
 ,(8,"risus","risus."),(1,"lectus","elit");
+<<<<<<< HEAD
 >>>>>>> bookmarks
+=======
+
+>>>>>>> 345199a2f5a0dcff148a741c2be790d589c475f5
 
 
 
@@ -51,18 +59,15 @@ VALUES
 (4, 'fgdfgsdfg'),
 (5, 'fgdfgsdfg');
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> bookmarks
 =======
+=======
+>>>>>>> 345199a2f5a0dcff148a741c2be790d589c475f5
 
-
--- INSERT INTO `sessions` (`userId`, `token`)
--- VALUES
--- ('1' , 'bdskjafbakjdbf#£¢'),
--- ('2' , 'bdskafbakjdbf#£¢'),
--- ('3' , 'bdskjafbgfvakjdbf#£¢'),
--- ('4' , 'bdskjbakjdbf#£¢'),
--- ('5' , 'bdskjafbakj%#dbf#£¢'),
--- ('6' , 'afbakjdbf#£¢');
 
 INSERT INTO `sessions` (`userId`,`token`) VALUES (6,"FOA70GQB0AS"),(5,"WIF40NRW4ZB"),(6,"TFE33WUB9NV"),(6,"RRL02XKP5NG"),(10,"SWD04OXZ3KA"),(8,"KON07KNJ9DN"),(3,"KZH14YKN2CB"),(3,"IPJ17QKE6WX"),(1,"DDE79QRE1XO"),(8,"IYQ60PVL7YS");
+<<<<<<< HEAD
 >>>>>>> bookmarks
+=======
+>>>>>>> 345199a2f5a0dcff148a741c2be790d589c475f5

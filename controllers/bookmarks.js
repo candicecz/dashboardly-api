@@ -7,6 +7,7 @@ module.exports = (dataLoader) => {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   // Modify a bookmark //
   bookmarksController.patch('/:id', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
@@ -26,6 +27,8 @@ module.exports = (dataLoader) => {
     // TODO: make sure to verify user
 
 =======
+=======
+>>>>>>> 345199a2f5a0dcff148a741c2be790d589c475f5
   // Modify a bookmark
   bookmarksController.patch('/:id', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
@@ -51,7 +54,11 @@ module.exports = (dataLoader) => {
         console.log(data);
       return res.json(data)})
       .catch(err => res.status(400).json(err));
+<<<<<<< HEAD
 >>>>>>> bookmarks
+=======
+
+>>>>>>> 345199a2f5a0dcff148a741c2be790d589c475f5
   });
   // Retrieve a list of boards
   // boardsController.get('/', (req, res) => {
