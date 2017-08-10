@@ -13,6 +13,7 @@ module.exports = (dataLoader) => {
       email: req.body.email,
       password: req.body.password
     };
+    console.log('16 auth', req.body);
     dataLoader.createUser(userData)
     .then(ans => {
       const email = ans.email;
@@ -40,7 +41,7 @@ module.exports = (dataLoader) => {
   // Delete a session (logout)
   authController.delete('/sessions', onlyLoggedIn, (req, res) => {
     console.log('ST: ', req.sessionToken, ' BT: ', req.body.token);
-    console.log('req body :: ', req.body); // 
+    console.log('req body :: ', req.body); //
     if (req.sessionToken === req.body.token) {
       dataLoader.deleteToken(req.body.token)
       .then(() => res.status(204).end())

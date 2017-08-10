@@ -50,7 +50,6 @@ module.exports = (dataLoader) => {
   // Delete a bookmark
   bookmarksController.delete('/:id', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
-
     const real_user = req.user.users_id; //
     const bookmark_id = req.params.id;
 

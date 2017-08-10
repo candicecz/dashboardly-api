@@ -7,6 +7,7 @@ module.exports = (dataLoader) => {
 
   // Retrieve a list of boards
   boardsController.get('/', (req, res) => {
+    console.log(' BOARDS NEW ');
     dataLoader.getAllBoards({
       page: req.query.page,
       limit: req.query.count
@@ -14,7 +15,6 @@ module.exports = (dataLoader) => {
     .then(data => res.json(data))
     .catch(err => res.status(400).json(err));
   });
-
 
   // Retrieve a single board
   boardsController.get('/:id', (req, res) => {
