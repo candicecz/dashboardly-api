@@ -1,5 +1,12 @@
 const express = require('express');
 const mysql = require('promise-mysql');
+const cors = require('express-cors');
+
+var corsOptions = {
+  origin: true,
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 
 // Express middleware
 const bodyParser = require('body-parser');
@@ -27,9 +34,25 @@ const dataLoader = new DashboardlyDataLoader(connection);
 
 // Express initialization
 const app = express();
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE,PATCH");
+  res.header("Access-Control-Allow-Headers", "Content-Type, authorization");
+  next();
+});
+
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(checkLoginToken(dataLoader));
+
+
+app.use(cors({
+  allowedOrigins: [
+    'https://23ab8953.ngrok.io', 'http://localhost:3000'
+  ],
+}));
+
 
 app.use('/auth', authController(dataLoader));
 app.use('/boards', boardsController(dataLoader));

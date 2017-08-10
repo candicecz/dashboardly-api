@@ -25,8 +25,8 @@ module.exports = (dataLoader) => {
       }
       const real_user = req.user.users_id;
 
-      dataLoader.bookmarkBelongsToUser(req.params.id, mock_user)
-      .then(() => dataLoader.updateBookmark(req.params.id, mock_data))
+      dataLoader.bookmarkBelongsToUser(req.params.id, real_user)
+      .then(() => dataLoader.updateBookmark(req.params.id, real_data))
       .then(data => {
         console.log(data);
       return res.json(data)})
@@ -50,7 +50,6 @@ module.exports = (dataLoader) => {
   // Delete a bookmark
   bookmarksController.delete('/:id', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
-
     const real_user = req.user.users_id; //
     const bookmark_id = req.params.id;
 
