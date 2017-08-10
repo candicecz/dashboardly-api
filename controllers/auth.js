@@ -1,15 +1,26 @@
 const express = require('express');
-
+//did this worrrrkkk?
 const onlyLoggedIn = require('../lib/only-logged-in');
+var md5 = require('md5'); // for hashin emails
+
 
 module.exports = (dataLoader) => {
   const authController = express.Router();
 
   // Create a new user (signup)
   authController.post('/users', (req, res) => {
-    dataLoader.createUser({
+    const userData = {
       email: req.body.email,
       password: req.body.password
+    };
+    console.log('16 auth', req.body);
+    dataLoader.createUser(userData)
+    .then(ans => {
+      const email = ans.email;
+      const HASH = md5(email);
+      const hashed = "https://www.gravatar.com/avatar/"+HASH;
+      ans.avatarUrl = hashed;
+      return ans;
     })
     .then(user => res.status(201).json(user))
     .catch(err => res.status(400).json(err));
@@ -29,6 +40,8 @@ module.exports = (dataLoader) => {
 
   // Delete a session (logout)
   authController.delete('/sessions', onlyLoggedIn, (req, res) => {
+    console.log('ST: ', req.sessionToken, ' BT: ', req.body.token);
+    console.log('req body :: ', req.body); //
     if (req.sessionToken === req.body.token) {
       dataLoader.deleteToken(req.body.token)
       .then(() => res.status(204).end())
@@ -42,57 +55,18 @@ module.exports = (dataLoader) => {
   // Retrieve current user
   authController.get('/me', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
-    res.status(500).json({ error: 'not implemented' });
+    dataLoader.getUserFromSession(req.sessionToken)
+    .then(ans => {
+      const email = ans.users_email;
+      const HASH = md5(email);
+      const hashed = "https://www.gravatar.com/avatar/"+HASH;
+      ans.avatarUrl = hashed;
+      console.log(ans);
+      return ans;
+    })
+    .then(ans => res.status(200).json(ans))
+    .catch(err => res.status(500).json({ error: 'self not implemented' }));
   });
 
   return authController;
 };
-
-// *****************************************
-
-
-
-
-// var express = require('express');
-// var bodyParser = require('body-parser'); // added
-// var mysql = require('promise-mysql'); //
-// var parse_middle = bodyParser.urlencoded({extended:false});
-//
-//
-// module.exports = function(myReddit) {
-//     var authController = express.Router();
-//
-//     authController.get('/login', function(request, response) {
-//         response.render("login-form"); // CHECK
-//     });
-//
-//     authController.post('/login', parse_middle, function(req, res) {
-//         var username = req.body.username;
-//         var password = req.body.password;
-//
-//         myReddit.checkUserLogin(username, password)
-//         .then(user => {
-//           return myReddit.createUserSession(user.id);
-//         })
-//         .then(token => {console.log("here is the token :  " + token);
-//             res.cookie("SESSION", token);})
-//         .then(() => res.redirect(302, '/'))
-//         .catch( e =>{
-//           res.status(401).send(e.message);
-//         })
-//
-//     });
-//
-//     authController.get('/signup', function(request, response) {
-//         response.render("signup-form"); // CHECK
-//     });
-//
-//     authController.post('/signup', parse_middle, function(req,res){
-//     myReddit.createUser({
-//         username : req.body.username,
-//         password : req.body.password
-//       }).then(res.redirect(302, '/auth/login')); // CHECK
-//     });
-//
-//     return authController;
-// }
