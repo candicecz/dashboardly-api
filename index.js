@@ -1,7 +1,6 @@
 const express = require('express');
 const mysql = require('promise-mysql');
-const cors = require('cors');
-
+const cors = require('express-cors');
 // Express middleware
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -31,6 +30,14 @@ const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(checkLoginToken(dataLoader));
+
+
+app.use(cors({
+  allowedOrigins: [
+    'https://23ab8953.ngrok.io', 'http://localhost:3000'
+  ],
+}));
+
 
 app.use('/auth', authController(dataLoader));
 app.use('/boards', boardsController(dataLoader));
