@@ -7,6 +7,7 @@ module.exports = (dataLoader) => {
 
   // Retrieve a list of boards
   boardsController.get('/', (req, res) => {
+    console.log(' BOARDS NEW ');
     dataLoader.getAllBoards({
       page: req.query.page,
       limit: req.query.count
@@ -15,9 +16,9 @@ module.exports = (dataLoader) => {
     .catch(err => res.status(400).json(err));
   });
 
-
   // Retrieve a single board
   boardsController.get('/:id', (req, res) => {
+    console.log("get board")
     dataLoader.getSingleBoard(req.params.id)
     .then(data => res.json(data))
     .catch(err => res.status(400).json(err));
@@ -26,11 +27,13 @@ module.exports = (dataLoader) => {
 
   // Create a new board
   boardsController.post('/', onlyLoggedIn, (req, res) => {
-    dataLoader.createBoard({
-      ownerId: req.user.id,
+
+    board_data = {
+      ownerId: req.user.users_id,
       title: req.body.title,
       description: req.body.description
-    })
+    };
+    dataLoader.createBoard(board_data)
     .then(data => res.status(201).json(data))
     .catch(err => res.status(400).json(err));
   });
@@ -39,12 +42,12 @@ module.exports = (dataLoader) => {
   // Modify an owned board
   boardsController.patch('/:id', onlyLoggedIn, (req, res) => {
     // First check if the board to be PATCHed belongs to the user making the request
-    dataLoader.boardBelongsToUser(req.params.id, req.user.id)
-    .then(() => {
+    // dataLoader.boardBelongsToUser(req.params.id, req.user.id)
+    // .then(() => {
       return dataLoader.updateBoard(req.params.id, {
         title: req.body.title,
         description: req.body.description
-      });
+      // });
     })
     .then(data => res.json(data))
     .catch(err => res.status(400).json(err));
@@ -66,13 +69,29 @@ module.exports = (dataLoader) => {
   // Retrieve all the bookmarks for a single board
   boardsController.get('/:id/bookmarks', (req, res) => {
     // TODO: this is up to you to implement :)
-    res.status(500).json({ error: 'not implemented' });
+    const this_board_id = req.params.id;
+    dataLoader.getAllBookmarksForBoard(this_board_id)
+    .then(data => res.json(data))
+    .catch(err => res.status(400).json(err));
+    // res.status(500).json({ error: 'not implemented' });
   });
 
   // Create a new bookmark under a board
   boardsController.post('/:id/bookmarks', onlyLoggedIn, (req, res) => {
     // TODO: this is up to you to implement :)
-    res.status(500).json({ error: 'not implemented' });
+    const user_id = req.user.users_id;
+    const board_id = Number(req.params.id);
+    const bookmark_data = {
+      boardId: board_id,
+      title: req.body.title,
+      url: req.body.url
+    }
+    dataLoader.boardBelongsToUser(board_id, user_id)
+    .then(() => {
+      dataLoader.createBookmark(bookmark_data) } )
+    .then(data => res.status(201).json(data))
+    .catch(err => res.status(400).json(err));
+    // res.status(500).json({ error: 'not implemented' });
   });
 
   return boardsController;
