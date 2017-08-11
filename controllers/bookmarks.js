@@ -21,7 +21,8 @@ module.exports = (dataLoader) => {
       const real_data = {
         title: req.body.title,
         boardId : req.body.boardId,
-        url: req.body.url
+        url: req.body.url,
+        description: req.body.description
       }
       const real_user = req.user.users_id;
 

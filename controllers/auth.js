@@ -40,16 +40,21 @@ module.exports = (dataLoader) => {
 
   // Delete a session (logout)
   authController.delete('/sessions', onlyLoggedIn, (req, res) => {
-    console.log('ST: ', req.sessionToken, ' BT: ', req.body.token);
-    console.log('req body :: ', req.body); //
-    if (req.sessionToken === req.body.token) {
-      dataLoader.deleteToken(req.body.token)
+      dataLoader.deleteToken(req.sessionToken)
       .then(() => res.status(204).end())
       .catch(err => res.status(400).json(err));
-    } else {
-      res.status(401).json({ error: 'Invalid session token' });
-    }
   });
+  // authController.delete('/sessions', onlyLoggedIn, (req, res) => {
+  //   console.log('ST: ', req.sessionToken, ' BT: ', req.body.token);
+  //   console.log('req body :: ', req.body); //
+  //   if (req.sessionToken === req.body.token) {
+  //     dataLoader.deleteToken(req.body.token)
+  //     .then(() => res.status(204).end())
+  //     .catch(err => res.status(400).json(err));
+  //   } else {
+  //     res.status(401).json({ error: 'Invalid session token' });
+  //   } //
+  // });
 
 
   // Retrieve current user
