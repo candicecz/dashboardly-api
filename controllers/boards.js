@@ -7,7 +7,6 @@ module.exports = (dataLoader) => {
 
   // Retrieve a list of boards
   boardsController.get('/', (req, res) => {
-    console.log(' BOARDS NEW ');
     dataLoader.getAllBoards({
       page: req.query.page,
       limit: req.query.count
@@ -27,6 +26,8 @@ module.exports = (dataLoader) => {
 
   // Create a new board
   boardsController.post('/', onlyLoggedIn, (req, res) => {
+
+    console.log('boards.js OOOOO' , this.body);
 
     board_data = {
       ownerId: req.user.users_id,
@@ -84,7 +85,8 @@ module.exports = (dataLoader) => {
     const bookmark_data = {
       boardId: board_id,
       title: req.body.title,
-      url: req.body.url
+      url: req.body.url,
+      description: req.body.description
     }
     dataLoader.boardBelongsToUser(board_id, user_id)
     .then(() => {
